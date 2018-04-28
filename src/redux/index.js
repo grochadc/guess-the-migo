@@ -1,20 +1,8 @@
 import {createStore} from 'redux';
-
-function throwDice (num) {
-  return Math.floor(Math.random()*num)+1;
-}
-
-function randomMember() {
-  let dice = throwDice(3);
-  return dice===1 ? 'Quavo' : dice===2 ? 'Offset' : 'Takeoff'
-}
-function randomImage(exclude) {
-  let dice = throwDice(10);
-  return dice===exclude ? this.throwDice(3) :  dice;
-}
+import {randomMember, randomImage} from '../lib/random/index';
 
 
-//ACTION
+//ACTIONS
 const sendAnswer = answer => ({ type: 'SEND_ANSWER', payload: answer});
 
 
@@ -32,8 +20,12 @@ const reducer = (state = initialState, action) => {
     case 'SEND_ANSWER':
       let { member, score, total } = state;
       let correct = action.payload===member;
+      let message = correct? 'You are correct!' : 'Incorrect, that\'s '+member;
+      alert(message);
       return {
         ...state,
+        member: randomMember(),
+        image: randomImage(),
         score: correct? score+1 : score,
         total: total+1,
       }
