@@ -1,14 +1,8 @@
 import React, { Component } from 'react';
 import './App.css';
+import Button from './components/Button';
 import 'bootstrap/dist/css/bootstrap.min.css';
-
-
-class Button extends Component {
-
-  render(){
-    return <button onClick={() => this.props.sendAnswer(this.props.member)}>{this.props.member}</button>;
-  }
-}
+import {sendAnswer, store} from './redux/index';
 
 class App extends Component {
   constructor(props){
@@ -55,5 +49,6 @@ class App extends Component {
     )
   }
 }
-
+window.store = store;
+window.sendAnswer = sendAnswer;
 export default App;
