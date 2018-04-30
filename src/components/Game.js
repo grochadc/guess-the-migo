@@ -2,15 +2,27 @@ import React, {Component} from 'react';
 import {connect} from 'react-redux';
 import Button from './Button';
 
+function getImageSrc(state){
+  let {currentMember, currentImage, members} = state;
+  let dir = '../images/'+currentMember;
+  window.imgs = members[currentMember].images;
+  let img = members[currentMember].images[currentImage].slice(1);
+  return dir+img;
+}
+
 const mapStateToProps = state =>{
-  return state;
+  return {
+    ...state,
+    imageSrc: getImageSrc(state)
+  }
 }
 
 class ConnectedGame extends Component{
   render(){
+    let { score, total, imageSrc} = this.props
     return (
       <div id="game">
-        <h4>Score: {this.props.score}/{this.props.total}</h4>
+        <h4>Score: {score}/{total}</h4>
 
         <div className="buttonContainer">
           <Button member="Quavo" />
@@ -18,7 +30,7 @@ class ConnectedGame extends Component{
           <Button member="Takeoff" />
         </div>
 
-        <div><img alt='' src={'images/'+this.props.member+'/'+this.props.image+'.jpg'} width="60%" height="60%"/></div>
+        <div><img alt='' src={imageSrc} width="60%" height="60%"/></div>
       </div>
     )
   }

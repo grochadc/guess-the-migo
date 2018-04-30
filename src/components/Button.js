@@ -17,7 +17,6 @@ class ConnectedButton extends Component {
     event.preventDefault();
     let answer = this.props.member;
     this.props.sendAnswer(answer);
-    console.log('Button clicked');
   }
 
   render(){

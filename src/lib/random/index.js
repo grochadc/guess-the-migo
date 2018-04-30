@@ -1,13 +1,13 @@
 function throwDice (num) {
-  return Math.floor(Math.random()*num)+1;
+  return Math.floor(Math.random()*num);
 }
 
 function randomMember() {
   let dice = throwDice(3);
-  return dice===1 ? 'Quavo' : dice===2 ? 'Offset' : 'Takeoff'
+  return dice===0 ? 'Quavo' : dice===1 ? 'Offset' : 'Takeoff'
 }
 function randomImage(exclude) {
-  let dice = throwDice(10);
+  let dice = throwDice(9);
   return dice===exclude ? this.throwDice(3) :  dice;
 }
 

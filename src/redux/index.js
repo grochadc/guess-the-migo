@@ -8,8 +8,13 @@ const sendAnswer = answer => ({ type: 'SEND_ANSWER', payload: answer});
 
 //REDUCER
 const initialState = {
-  member: randomMember(),
-  image: randomImage(),
+  members: {
+    Quavo: {images:require.context('../images/Quavo/', false, /\d*\.jpg/).keys()},
+    Offset: {images: require.context('../images/Quavo/', false, /\d*\.jpg/).keys()},
+    Takeoff: {images: require.context('../images/Quavo/', false, /\d*\.jpg/).keys()}
+  },
+  currentMember: randomMember(),
+  currentImage: randomImage(),
   score: 0,
   total:0
 }
@@ -18,14 +23,14 @@ const initialState = {
 const reducer = (state = initialState, action) => {
   switch(action.type){
     case 'SEND_ANSWER':
-      let { member, score, total } = state;
-      let correct = action.payload===member;
-      let message = correct? 'You are correct!' : 'Incorrect, that\'s '+member;
+      let { currentMember, score, total } = state;
+      let correct = action.payload===currentMember;
+      let message = correct? 'You are correct!' : 'Incorrect, that\'s '+currentMember;
       alert(message);
       return {
         ...state,
-        member: randomMember(),
-        image: randomImage(),
+        currentMember: randomMember(),
+        currentImage: randomImage(),
         score: correct? score+1 : score,
         total: total+1,
       }
