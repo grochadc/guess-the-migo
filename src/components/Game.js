@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {connect} from 'react-redux';
 import Button from './Button';
 
@@ -17,9 +17,8 @@ const mapStateToProps = state =>{
   }
 }
 
-class ConnectedGame extends Component{
-  render(){
-    let { score, total, imageSrc} = this.props
+function ConnectedGame(props) {
+    let { score, total, imageSrc} = props
     return (
       <div id="game">
         <h4>Score: {score}/{total}</h4>
@@ -30,12 +29,10 @@ class ConnectedGame extends Component{
           <Button member="Takeoff" />
         </div>
 
-        <div><img alt='' src={imageSrc} width="60%" height="60%"/></div>
+        <div><img alt='Migo Member' src={imageSrc} width="60%" height="60%"/></div>
       </div>
     )
   }
-}
-
 
 const Game = connect(mapStateToProps)(ConnectedGame);
 export default Game;
