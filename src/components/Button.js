@@ -1,4 +1,4 @@
-import React, {Component} from 'react';
+import React from 'react';
 import {sendAnswer} from '../redux/index';
 import {connect} from 'react-redux';
 
@@ -8,21 +8,9 @@ const mapDispatchToProps = dispatch => {
   }
 }
 
-class ConnectedButton extends Component {
-  constructor(props){
-    super(props);
-    this.handleClick = this.handleClick.bind(this);
-  }
-  handleClick(event){
-    event.preventDefault();
-    let answer = this.props.member;
-    this.props.sendAnswer(answer);
-  }
-
-  render(){
-    let { member } = this.props;
-    return <button onClick={this.handleClick}>{member}</button>;
-  }
+function ConnectedButton(props){
+    let { member, sendAnswer } = props;
+    return <button onClick={() => sendAnswer(member)}>{member}</button>;
 }
 
 const Button = connect(null, mapDispatchToProps)(ConnectedButton);
